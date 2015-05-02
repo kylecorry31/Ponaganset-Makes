@@ -23,6 +23,6 @@ while run:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         run = False
         break
-    time.sleep(0.01)
+    time.sleep(0.05)
 video_capture.release()
 cv2.destroyAllWindows()

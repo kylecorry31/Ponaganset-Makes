@@ -1,0 +1,145 @@
+<!doctype html>
+
+
+<html>
+
+<head>
+    <title>Raspberry Pi</title>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script>
+        var driving = false;
+        var lighting = false;
+
+        function drive() {
+            if (driving) {
+                $.get("/api/sensors", {
+                    "sensor": 4
+                });
+            } else {
+                $.get("/api/sensors", {
+                    "sensor": 6
+                });
+            }
+        }
+
+        function light() {
+            if (lighting) {
+                $.get("/api/sensors", {
+                    "sensor": 5
+                });
+            } else {
+                $.get("/api/sensors", {
+                    "sensor": 6
+                });
+            }
+        }
+        $(document).ready(function () {
+
+            var down = false;
+            var mouseDowm = false;
+
+            $(document).keydown(function () {
+                if (!down) {
+                    driving = true;
+                    drive();
+                    down = true;
+                }
+            });
+            $(document).keyup(function () {
+                driving = false;
+                drive();
+                down = false;
+            });
+            $(document).mousedown(function () {
+                if (!mouseDowm) {
+                    lighting = true;
+                    light();
+                    mouseDowm = true;
+                }
+            });
+            $(document).mouseup(function () {
+                lighting = false;
+                light();
+                mouseDowm = false;
+            });
+
+            return false;
+        });
+    </script>
+    <style>
+        .img-small {
+            max-height: 5rem;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+</head>
+
+<body>
+
+
+    <div class="section no-pad-bot red z-depth-2" id="index-banner">
+        <div class="container">
+            <br>
+            <h1 class="header center white-text">Raspberry Pi</h1>
+            <div class="row center">
+                <h5 class="header col s12 light white-text">Kyle Corry</h5>
+            </div>
+
+            <br>
+            <br>
+            <br>
+
+        </div>
+    </div>
+
+    <br>
+
+    <div class="row orange z-depth-2">
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <h2 class="header white-text text-darken-1">
+              Click anywhere to turn on LED.
+          <i class="right large mdi-image-wb-incandescent"></i></h2>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+
+
+    <div class="row blue z-depth-2">
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <h2 class="header right-align white-text text-darken-1">
+             <i class="left large mdi-maps-directions-car"></i>
+              Press any key to drive forward.
+          </h2>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            <div class="container">
+                <div class="container">
+                    <img src="https://www.raspberrypi.org/wp-content/uploads/2012/03/Raspi_Colour_R.png" alt="pi" class="img-responsive img-small left">
+                    <img src="https://node-os.com/images/nodejs.png" alt="node" class="img-responsive img-small right">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
